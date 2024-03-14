@@ -6,7 +6,7 @@
   <ul>
     <li *ngFor="let task of taskList; let i = index">
       {{ task }}
-      <button (click)="removeTask(i)">Remove</button>
+      <button (click)="removeTask(i, task)">Remove</button>
     </li>
   </ul>
   

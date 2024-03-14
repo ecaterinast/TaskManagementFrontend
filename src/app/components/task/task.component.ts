@@ -11,27 +11,46 @@ import { mainService } from '../../service/service';
   styleUrl: './task.component.css',
 })
 export class TaskComponent implements OnInit {
-  taskList: string[] = [];
+  taskList: any=[];
   newTask: string = '';
 
   constructor(private service:mainService) { }
 
   ngOnInit(): void {
+    this.service.getTasks().subscribe((list: Array<any>)=>{
+      console.log(list);
+      this.taskList = list.map(t => t.name);
+    })
   }
 
 
   addTask(): void {
-    this.service.getTask().subscribe(x=>{
-      console.log(x);
-    })
+    
     if (this.newTask.trim() !== '') {
       this.taskList.push(this.newTask);
+      this.service.setTask({
+        "id": 0,
+        "name": this.newTask,
+        "description": "string",
+        "taskCreated": "2024-03-10T20:47:54.885Z",
+        "dueDate": "2024-03-10T20:47:54.885Z",
+        "isCompleted": true
+      }).subscribe(x=>{
+        console.log(x);
+      })
       this.newTask = '';
+      
+
     }
   }
 
-  removeTask(index: number): void {
-    this.taskList.splice(index, 1);
+  removeTask(index: number, name: string): void {
+    
+    this.service.removeTask(name).subscribe(x=>{
+      console.log(x);
+      this.taskList.splice(index, 1);
+    })
+    
   }
 }
 
