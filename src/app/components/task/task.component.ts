@@ -35,6 +35,7 @@ export class TaskComponent implements OnInit {
         "taskCreated": "2024-03-10T20:47:54.885Z",
         "dueDate": "2024-03-10T20:47:54.885Z",
         "isCompleted": true
+        
       }).subscribe(x=>{
         console.log(x);
       })
