@@ -16,13 +16,13 @@ export class TaskComponent implements OnInit {
 
   checkoutForm = this.formBuilder.group({
     name: '',
-    status: '',
+    status: 0,
     description: '',
-    type: 0,
-    priority: 0
-    //taskCreated: ''
-    //dueDate: ''
-    //isCompleted: ''
+    type: 'Epic',
+    priority: 'Low',
+    taskCreated: '',
+    dueDate: '',
+    isCompleted: ''
   });
 
   constructor(private service: mainService,  private formBuilder: FormBuilder,) { }
@@ -37,13 +37,14 @@ export class TaskComponent implements OnInit {
   onSubmit() {
     console.log(this.checkoutForm.value);
     this.taskList.push(this.checkoutForm.value);
-    //this.checkoutForm.value.taskCreated = new Date().toISOString();
-    //this.checkoutForm.value.dueDate = new Date().toISOString();
-    this.checkoutForm.value.type = this.checkoutForm.value.type * 1;
+    this.checkoutForm.value.status =  this.checkoutForm.value.status *1;
+    this.checkoutForm.value.taskCreated = new Date().toISOString();
+    this.checkoutForm.value.dueDate = new Date().toISOString();
     this.service.setTask(this.checkoutForm.value).subscribe(x => {
       console.log(x);
     })
   }
+
 
 
   removeTask(name: string): void {
