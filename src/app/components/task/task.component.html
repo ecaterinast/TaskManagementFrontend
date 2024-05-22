@@ -1,15 +1,145 @@
-<div>
+<!-- <div>
     <input type="text" [(ngModel)]="newTask" placeholder="Enter task">
     <input type="text" [(ngModel)]="newTask" placeholder="Enter description">
     <input type="text" [(ngModel)]="newTask" placeholder="Enter task">
     <input type="text" [(ngModel)]="newTask" placeholder="Enter task">
     <button (click)="addTask()">Add Task</button>
   </div>
-  
+ 
   <ul>
     <li *ngFor="let task of taskList; let i = index">
       {{ task }}
       <button (click)="removeTask(i, task)">Remove</button>
     </li>
   </ul>
-  
+   -->
+
+   <div class="container">
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h2>Create NEW TASK</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Open Tasks:</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Stories</h6>
+              <small class="text-muted">description</small>
+            </div>
+            <span class="text-muted">12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Bugs:</h6>
+              <small class="text-muted">description</small>
+            </div>
+            <span class="text-muted">8</span>
+          </li>
+        
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Epics</h6>
+              <small>Active</small>
+            </div>
+            <span class="text-success">5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong>25</strong>
+          </li>
+        </ul>
+
+
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">New Created:</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let task of taskList; let i = index">
+
+            <div class="text-success">
+              <h6 class="my-0">{{task.name}}</h6>
+              <small> {{task.description}}</small>
+            </div>
+
+            <button (click)="removeTask(task.name)">Remove</button>
+
+          </li>
+        </ul>
+       
+      </div>
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Details:</h4>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">Task Name</label>
+              <input type="text" class="form-control" formControlName="name" name="name" id="name" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid name is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" formControlName="description" name="description"  id="description" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="status">Status</label>
+            <input type="text" class="form-control"  formControlName="status" name="status" id="status" placeholder="NEW/In Progress" required="">
+            <div class="invalid-feedback">
+              Please enter status
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="type">Type</label>
+              <select class="custom-select d-block w-100" id="type" formControlName="type" required="">
+                <option value=0>Task</option>
+                <option value=1>Epic</option>
+                <option value=2>Bug</option>
+              </select>
+              <div class="invalid-feedback">
+                Please selecft type.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="priority">Priority</label>
+              <select class="custom-select d-block w-100" id="priority"   formControlName="priority" required="">
+                <option value=0>High</option>
+                <option value=1>Medium</option>
+                <option value=2>Low</option>
+              </select>
+              <div class="invalid-feedback">
+                Please selecft type.
+              </div>
+            </div>
+          </div>
+
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+
+
+
+    
+
+
+  </div>
